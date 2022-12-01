@@ -1,10 +1,7 @@
-<#include "mcitems.ftl">
 /*@ItemStack*/(new Object(){
-	public ItemStack getItemStack(int sltid, Entity entity) {
-		AtomicReference<ItemStack> _retval = new AtomicReference<>(ItemStack.EMPTY);
-		entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> {
-			_retval.set(capability.getStackInSlot(sltid).copy());
-		});
-		return _retval.get();
+	public ItemStack getItemStack(int slotid, Entity entity) {
+		AtomicReference<ItemStack> stack = new AtomicReference<>(ItemStack.EMPTY);
+			stack.set(${input$entity}.getSlot(${input$slotid}).get().copy());
+		return stack.get();
 	}
 }.getItemStack(${opt.toInt(input$slotid)}, ${input$entity}))
